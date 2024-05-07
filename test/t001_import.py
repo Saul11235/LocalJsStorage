@@ -1,0 +1,3 @@
+import LocalJsStorage
+
+print("ok")
