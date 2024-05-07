@@ -1,0 +1,12 @@
+{
+  "nombre": "Juan",
+  "apellido": "Pérez",
+  "edad": 30,
+  "correo": "juan@example.com",
+  "dirección": {
+    "calle": "Calle Principal",
+    "ciudad": "Ciudad Ejemplo",
+    "país": "País Ejemplo"
+  },
+  "__img1": ["programación", "viajes", "lectura"]
+}
