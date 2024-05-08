@@ -10,7 +10,6 @@ clearJs=[];first=False
 #---------------------------------------------
 
 def clearLineJs(line):
-    line=line.replace("\t"," ").replace("  "," ")
     return line
 
 #---------------------------------------------
