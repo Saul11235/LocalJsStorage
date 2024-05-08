@@ -1,8 +1,5 @@
 {
   "titulo1":"Hola mundo",
   "titulo2":"Hello World",
-  "body": [
-
-  ]
-
+  "body": true
 }

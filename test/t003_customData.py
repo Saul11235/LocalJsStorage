@@ -1,5 +1,5 @@
 from LocalJsStorage import LocalJsStorage
 
-LocalJsStorage("./dataExample","./customJs.js")
+LocalJsStorage("./dataExample","./customJs.js","./dataExample/")
 
 print("ok")

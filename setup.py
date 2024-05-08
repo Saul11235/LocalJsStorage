@@ -14,9 +14,7 @@ setup(
     packages=find_packages(),  # Automatically discover and include all packages
     keywords='DEV debug flask',
     install_requires=[
-        "flask"
     ],
     long_description=readme_file,
     long_description_content_type="text/markdown",
-
 )

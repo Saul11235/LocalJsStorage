@@ -2,8 +2,15 @@
 # by Edwin Saul
 def getJS():
 	return """
-//
 // Ejemplo de libreria para Js Storage
-console.log(LocalJsStorage);
-console.log("hola mundo");
-print("lolo");"""
+function log() {
+  console.log("lolo");
+  console.log(LocalJsStorage)
+}
+// create an put all JSON file on an div
+function putLocalJsStorage(){
+  let text=JSON.stringify(LocalJsStorage,null,2);
+  element=document.getElementById("LocalJsStorage");
+  element.textContent=text;
+}
+putLocalJsStorage();"""
