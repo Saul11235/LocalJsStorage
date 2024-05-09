@@ -24,7 +24,13 @@ js generated contains:
 
 ### list of all js functions
 
--
+- *LJS_getMain()*         get main object.
+- *LJS_formatPath(path)*  format path to list.
+- *LJS_childs(path)*      get childs from an path.
+- *LJS_get(path)*         get content from a path.
+- *LJS_exists(path)*      return true or false if path exists.
+- *LJS_createDiv()*       create <div id="LocalJsStorage"> on DOM.
+- *LJS_tree()*            print tree structure on console.
 
 
 
