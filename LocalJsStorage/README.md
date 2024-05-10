@@ -26,6 +26,7 @@ js generated contains:
 
 - **LJS_getMain()**         get main object.
 - **LJS_formatPath(path)**  format path to list.
+- **LJS_formatPathStr(path)** format path to str.
 - **LJS_childs(path)**      get childs from an path.
 - **LJS_get(path)**         get content from a path.
 - **LJS_exists(path)**      return true or false if path exists.

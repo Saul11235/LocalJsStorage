@@ -11,8 +11,27 @@ function LJS_tree(){function LJS_line_tree(args){let childs=LJS_childs(args);let
 //-----------------------------------------------------------
 
 // LJS_childs(path) --> get list of childs of a path
-function LJS_getMain(){
-  return LocalJsStorage;
+function LJS_childs(path){
+  path=LJS_formatPath(path);
+  if (path.length==0) {
+    return Object.keys(LJS_getMain());
+  };
+  let localVar=LJS_getMain();
+  let childs=[];
+  for(var i=0;i<path.length;i++){
+    if (localVar!=undefined) {
+      childs=Object.keys(localVar);
+      if (childs.includes(path[i])) {
+	localVar=localVar[path[i]];
+      } else { localVar=undefined;
+      };
+    };
+  };
+  if (localVar!=undefined) {
+    childs=Object.keys(localVar);
+    return childs;
+  } else { return [];
+  };
 };
 
 //-----------------------------------------------------------
@@ -20,4 +39,7 @@ function LJS_getMain(){
 // test
 
 //console.log("test LJS_childs");
-//console.log(LJS_getMain());
+console.log(LJS_childs(""));
+console.log(LJS_childs("blog"));
+console.log(LJS_childs("blog/A001_hola_mundo"));
+console.log(LJS_childs("noExists"));
