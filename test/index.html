@@ -11,12 +11,17 @@ body {
   <body>
     <h1> Test LocalJsStorage</h1>
     <div id="LocalJsStorage">Module not loaded :(</div>
+    <!-- Add autogen file -->
     <script src="../test/customJs.js"></script>
+    <!-- Add custom funcs -->
+    <script src="../test/js/main.js"></script>
     <script>
 	LJS_createDiv();
 	console.log(LJS_getUrlParams());
 	console.log(LJS_makeUrl("data","values"));
+	LJS_evalMain();
     </script>
+
 
   </body>
 </html>
