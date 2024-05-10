@@ -11,13 +11,44 @@ function LJS_tree(){LJS_lineTree([]);};
 function LJS_lineTree(path){let args=LJS_formatPath(path);let childs=LJS_childs(path);let space="";for(var i=0;i<args.length;i++){space+=" "+" "+" "+" "};for(var i=0;i<childs.length;i++){if(childs[i]!="__json__"){console.log(space+childs[i]);};if(childs.includes("__json__")&& !childs.includes("__time__")){let newargs=args;newargs.push(childs[i]);LJS_lineTree(newargs);};};return args;};
 function LJS_getJsonChilds(path){let pathF=LJS_formatPath(path);let pathFjson=pathF.concat("__json__");if(LJS_exists(pathFjson)){if(LJS_get(pathFjson)){return[LJS_formatPathStr(pathF)];}else{let jsonChilds=[];let childsContainer=LJS_childs(path);for(let i=0;i<childsContainer.length;i++){let contentSubPath=LJS_getJsonChilds(pathF.concat(childsContainer[i]));for(let ii=0;ii<contentSubPath.length;ii++){let newValue=contentSubPath[ii];jsonChilds.push(newValue);};};return jsonChilds;};};return[];};
 function LJS_getTags(path){let tags={};let allChilds=LJS_getJsonChilds(path);for(let i=0;i<allChilds.length;i++){let strCurrentPath=allChilds[i];let currentPath=LJS_formatPath(allChilds[i]);let currentTags=LJS_get(currentPath.concat("__tags__"));for(let ii=0;ii<currentTags.length;ii++){let currentTag=currentTags[ii];if(Object.keys(tags).includes(currentTag)){let contentTag=tags[currentTag];contentTag.push(strCurrentPath);tags[currentTag]=contentTag;}else{tags[currentTag]=[strCurrentPath];};};};return tags;};
-//-----------------------
+//-----------------------------------------------------------
 
-// test
 
-//-----------------------
-console.log("begin");
-console.log(LJS_getJsonChilds(""));
-console.log(LJS_get(""));
-console.log("end");
+// LJS_tree() --> print tree of elements
+
+function LJS_getTags(path) {
+  let tags={};
+  let allChilds=LJS_getJsonChilds(path);
+  for (let i=0;i<allChilds.length;i++){
+    let strCurrentPath=allChilds[i];
+    let currentPath=LJS_formatPath(allChilds[i]);
+    let currentTags=LJS_get(currentPath.concat("__tags__"));
+    for (let ii=0;ii<currentTags.length;ii++){
+      let currentTag=currentTags[ii];
+      if (Object.keys(tags).includes(currentTag)) {
+	// add to an existing tag
+	let contentTag=tags[currentTag];
+	contentTag.push(strCurrentPath);
+	tags[currentTag]=contentTag;
+      } else {
+	// new tag
+	tags[currentTag]=[strCurrentPath];
+      };
+    };
+  };
+  return tags;
+};
+
+
+//-----------------------------------------------------------
+
+// test LJS_getJsonChilds
+
+console.log("test LJS_getJsonChilds");
+console.log(LJS_getTags("blog"));
+
+
+
+
+
 
