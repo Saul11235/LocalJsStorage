@@ -12,36 +12,31 @@ function LJS_lineTree(path){let args=LJS_formatPath(path);let childs=LJS_childs(
 function LJS_getJsonChilds(path){let pathF=LJS_formatPath(path);let pathFjson=pathF.concat("__json__");if(LJS_exists(pathFjson)){if(LJS_get(pathFjson)){return[LJS_formatPathStr(pathF)];}else{let jsonChilds=[];let childsContainer=LJS_childs(path);for(let i=0;i<childsContainer.length;i++){let contentSubPath=LJS_getJsonChilds(pathF.concat(childsContainer[i]));for(let ii=0;ii<contentSubPath.length;ii++){let newValue=contentSubPath[ii];jsonChilds.push(newValue);};};return jsonChilds;};};return[];};
 //-----------------------------------------------------------
 
-// LJS_childs(path) --> get list of childs of a path
-function LJS_childs(path){
-  path=LJS_formatPath(path);
-  if (path.length==0) {
-    return Object.keys(LJS_getMain());
-  };
-  let localVar=LJS_getMain();
-  let childs=[];
-  for(var i=0;i<path.length;i++){
-    if (localVar!=undefined) {
-      childs=Object.keys(localVar);
-      if (childs.includes(path[i])) {
-	localVar=localVar[path[i]];
-      } else { localVar=undefined;
+
+// LJS_tree() --> print tree of elements
+
+function LJS_lineTree(path){
+  let args=LJS_formatPath(path);
+  let childs=LJS_childs(path);
+  let space="";
+  for (var i=0;i<args.length;i++) {space+=" "+" "+" "+" "};
+  for (var i=0;i<childs.length;i++) {
+    if (childs[i]!="__json__") {
+      console.log(space+childs[i]);
+      };
+    if (childs.includes("__json__") && !childs.includes("__time__")) {
+	let newargs=args;
+	newargs.push(childs[i]);
+      	LJS_lineTree(newargs);
       };
     };
-  };
-  if (localVar!=undefined) {
-    childs=Object.keys(localVar);
-    return childs;
-  } else { return [];
-  };
+    return args;
 };
+
 
 //-----------------------------------------------------------
 
-// test
+// test LJS_tree
 
-//console.log("test LJS_childs");
-console.log(LJS_childs(""));
-console.log(LJS_childs("blog"));
-console.log(LJS_childs("blog/A001_hola_mundo"));
-console.log(LJS_childs("noExists"));
+LJS_tree();
+
