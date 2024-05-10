@@ -6,7 +6,7 @@ f.close()
 
 setup(
     name='LocalJsStorage',         
-    version='1.0.0', 
+    version='0.1', 
     description='package for local file js generation files',
     author='Edwin Saul',
     author_email='edwinsaulpm@gmail.com',

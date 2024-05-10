@@ -19,13 +19,23 @@ function LJS_getMainFuncs(){return LocalJsStorageFunctions;};
 function LJS_setMainFuncs(key,func){LocalJsStorageFunctions[key]=func;};
 function LJS_eval(key,args){var funcs=LJS_getMainFuncs();var fun=funcs[key];if(fun !== undefined){fun(args);return true;}else{return false;};};
 function LJS_evalMain(){let urlParams=LJS_getUrlParams();let key=urlParams[0];let values=urlParams[1];let first=LJS_eval(key,values);if(!first){LJS_eval("404",values);}};
-//-----------------------
+//-----------------------------------------------------------
 
-// test
+function LJS_setMainFuncs(key,func) {
+  LocalJsStorageFunctions[key]=func;
+};
 
-//-----------------------
-console.log("begin");
-console.log(LJS_getJsonChilds(""));
-console.log(LJS_get(""));
-console.log("end");
+//-----------------------------------------------------------
+
+// test LJS_getMainFuncs
+
+console.log("test LJS_getMainFuncs");
+function myfun(widget){
+  console.log("my fun---------");
+  console.log(widget);
+  console.log("---------------");
+};
+
+LJS_setMainFuncs("key",myfun);
+console.log(LJS_getMainFuncs());
 

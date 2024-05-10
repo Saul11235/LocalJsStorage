@@ -19,13 +19,32 @@ function LJS_getMainFuncs(){return LocalJsStorageFunctions;};
 function LJS_setMainFuncs(key,func){LocalJsStorageFunctions[key]=func;};
 function LJS_eval(key,args){var funcs=LJS_getMainFuncs();var fun=funcs[key];if(fun !== undefined){fun(args);return true;}else{return false;};};
 function LJS_evalMain(){let urlParams=LJS_getUrlParams();let key=urlParams[0];let values=urlParams[1];let first=LJS_eval(key,values);if(!first){LJS_eval("404",values);}};
-//-----------------------
+//-----------------------------------------------------------
 
-// test
+function LJS_makeUrl(key=[],value="") {
+  //
+  // return url with key and value
 
-//-----------------------
-console.log("begin");
-console.log(LJS_getJsonChilds(""));
-console.log(LJS_get(""));
-console.log("end");
+  // config to stringify all vars in all cases
+  let skey=key;  
+  let svalue=value;
+  if (Array.isArray(key)){
+    skey=key[0];
+    svalue=key[1];
+  };
+  // ........................
+  let add="?"+skey+"="+svalue;
+  return window.location.href.split("?")[0]+add;
+};
+
+
+//-----------------------------------------------------------
+
+// test LJS_getSort
+
+console.log("test LJS_getSort");
+console.log(LJS_makeUrl("data","lolo"));
+
+console.log(LJS_makeUrl(["data","lolo"]));
+
 
