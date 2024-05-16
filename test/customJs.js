@@ -21,4 +21,4 @@ function LJS_makeUrl(key=[],value=""){ let skey=key; let svalue=value; if(Array.
 function LJS_getMainFuncs(){ return LocalJsStorageFunctions;};
 function LJS_setMainFuncs(key,func){ LocalJsStorageFunctions[key]=func;};
 function LJS_eval(key,args){ var funcs=LJS_getMainFuncs(); var fun=funcs[key]; if(fun !== undefined){ try{ LocalJsStorage_key=key; LocalJsStorage_args=args;}catch(e){ console.log(e);}; fun(args); return true;}else{ return false;};};
-function LJS_evalMain(){ let urlParams=LJS_getUrlParams(); let key=urlParams[0]; let values=urlParams[1]; let first=LJS_eval(key,values); if(!first){ LJS_eval("404",values);}};
+function LJS_evalMain(){ let urlParams=LJS_getUrlParams(); let key=urlParams[0]; let values=urlParams[1]; let first=LJS_eval(key,values); if(!first){ LJS_eval("v404",values);}};
