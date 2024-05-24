@@ -57,7 +57,7 @@ class LocalJsStorage:
         allFiles=[]
         for x in listdir(path): 
             fullPath=join(path,x)
-            if isfile(fullPath) and not(x.startswith("__")):allFiles.append(x)
+            if isfile(fullPath) and not(x.startswith("__")) and not(x=="README.md"):allFiles.append(x)
         return allFiles
 
     def __getDicc(self,path,listPath): 
@@ -74,7 +74,14 @@ class LocalJsStorage:
                 except: pass
         #-----------------------------
         for x in self.__getFiles(path): 
-            Dicc[x]=x
+            if x.endswith(".md"):
+                fullPath=join(path,x)
+                file=open(fullPath,"r",encoding="utf8")
+                content=file.read()
+                file.close()
+                Dicc[x]=content
+            else:
+                Dicc[x]=x
         #-----------------------------
         keys=list(Dicc.keys())
         if "__time__" in keys and "__tags__" in keys:
