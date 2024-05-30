@@ -24,45 +24,31 @@ function LJS_eval(key,args){var funcs=LJS_getMainFuncs();var fun=funcs[key];if(f
 function LJS_evalMain(){let urlParams=LJS_getUrlParams();let key=urlParams[0];let values=urlParams[1];let first=LJS_eval(key,values);if(!first){LJS_eval("v404",values);}};
 //-----------------------------------------------------------
 
-
-// LJS_tree() --> print tree of elements
-
-function LJS_getSort(path) {
-  let obj={};
-  let allChilds=LJS_getJsonChilds(path);
-  for (let i=0;i<allChilds.length;i++){
-    let newpath=allChilds[i];
-    let newpathF=LJS_formatPath(newpath).concat("__time__");
-    let timeVar=LJS_get(newpathF);
-    let stringTime=timeVar.toString();
-    if (Object.keys(obj).includes(stringTime)){
-      // add to an existing tag
-      let contentDate=obj[stringTime];
-      contentDate.push(newpath);
-      obj[stringTime]=contentDate;
-
-    } else {
-      // new date
-      obj[stringTime]=[newpath];
+// LJS_childs(path) --> get list of childs of a path
+function LJS_childsData(path){
+  let childs=LJS_childs(path);
+  let list=[];
+  for (let i=0;i<childs.length;i++){
+    let current=childs[i];
+    if (current!="__json__" && current!="__tags__" && current!="__time__" && !current.includes(".")){
+      list.push(current);
     };
   };
-  // sort dates 
-  let sort=[];
-  let sortedDates=Object.keys(obj).sort().reverse();
-  for (let i=0;i<sortedDates.length;i++){
-    let paths=obj[sortedDates[i]];
-    for (let ii=0;ii<paths.length;ii++){
-      sort.push(paths[ii]);
-    };
-  };
-  return sort;
+  return list;
 };
-
 
 //-----------------------------------------------------------
 
-// test LJS_getSort
+// test
 
-console.log("test LJS_getSort");
-console.log(LJS_getSort(""));
+//console.log("test LJS_childs");
+console.log(LJS_childs(""));
+console.log(LJS_childs("blog"));
+console.log(LJS_childs("blog/A001_hola_mundo"));
+console.log(LJS_childs("noExists"));
+
+console.log(LJS_childsData(""));
+console.log(LJS_childsData("blog"));
+console.log(LJS_childsData("blog/A001_hola_mundo"));
+console.log(LJS_childsData("noExists"));
 
